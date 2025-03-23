@@ -1,4 +1,4 @@
-# remind-me
+# remind-me-later
 
 A simple CLI tool that scans your codebase for developer comments like `TODO`, `FIXME`, and `NOTE`, so you don’t forget to address them later.
 
