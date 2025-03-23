@@ -1,5 +1,9 @@
 // TODO: example.ts - Something 1
 
+const TS_TODO: string = "";
+const TS_FIXME: string = "";
+const TS_NOTE: string = "";
+
 function multiply(a: number, b: number): number {
   // FIXME: example.ts - Something 2
   return a * b;

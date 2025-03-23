@@ -7,6 +7,9 @@ export default function ExampleJSX() {
     <div>
       {/* NOTE: ExampleJSX.jsx - Something 3 */}
       <h1>Example JSX</h1>
+      <p>TODO</p>
+      <p>FIXME</p>
+      <p>NOTE</p>
     </div>
   );
 }

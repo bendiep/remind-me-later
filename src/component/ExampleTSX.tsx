@@ -9,6 +9,9 @@ export const ExampleTSX = ({}: ExampleTSXProps) => {
     <div>
       {/* NOTE: ExampleTSX.tsx - Something 3 */}
       <h1>Example TSX</h1>
+      <p>TODO</p>
+      <p>FIXME</p>
+      <p>NOTE</p>
     </div>
   );
 };
