@@ -1,5 +1,5 @@
 {
-  "name": "remind-me-later",
+  "name": "remind-me",
   "version": "1.0.0",
   "description": "CLI tool to scan your code for TODO, FIXME, and NOTE reminders.",
   "keywords": [
@@ -14,13 +14,13 @@
     "backlog",
     "task"
   ],
-  "homepage": "https://github.com/bendiep/remind-me-later#readme",
+  "homepage": "https://github.com/bendiep/remind-me#readme",
   "bugs": {
-    "url": "https://github.com/bendiep/remind-me-later/issues"
+    "url": "https://github.com/bendiep/remind-me/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bendiep/remind-me-later.git"
+    "url": "git+https://github.com/bendiep/remind-me.git"
   },
   "license": "MIT",
   "author": "Ben Diep",
