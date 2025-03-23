@@ -11,8 +11,6 @@ function multiply(a: number, b: number): number {
 
 // NOTE: example.ts - Something 3
 
-/*
- * TODO: example.ts - Something 4
+/* TODO: example.ts - Something 4
  * FIXME: example.ts - Something 5
- * NOTE: example.ts - Something 6
- */
+ * NOTE: example.ts - Something 6 */
