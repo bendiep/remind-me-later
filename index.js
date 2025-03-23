@@ -4,14 +4,22 @@ import fg from "fast-glob";
 import fs from "fs/promises";
 import chalk from "chalk";
 
-// Combined regex to match both JS and JSX comments containing TODO, FIXME, or NOTE.
-// - For JS comments: matches lines starting with "//" followed by the tag.
-// - For JSX comments: matches "{/*" then the tag and ends with "*/}".
-const pattern =
-  /(?:\/\/\s*(TODO|FIXME|NOTE):?.*)|(?:\{\/\*\s*(TODO|FIXME|NOTE):?.*\*\/\})/i;
+// Individual regex patterns
+const todoTags = "(TODO|FIXME|NOTE)";
+const jsCommentPattern = `\/\/\\s*${todoTags}:?.*`;
+const jsxCommentPattern = `\\{\\/\\*\\s*${todoTags}:?.*\\*\\/\\}`;
+
+// Combined regex pattern
+const pattern = new RegExp(
+  `(?:${jsCommentPattern})|(?:${jsxCommentPattern})`,
+  "i"
+);
 
 async function scanComments(dir = ".") {
-  // Search for .js, .ts, .jsx, and .tsx files, excluding node_modules
+  /*
+   * Files to scan: *.js, *.ts, *.jsx, *.tsx
+   * Files to ignore: node_modules
+   */
   const entries = await fg(["**/*.{js,ts,jsx,tsx}"], {
     cwd: dir,
     ignore: ["node_modules"],
@@ -33,6 +41,7 @@ async function scanComments(dir = ".") {
             ? chalk.red
             : chalk.yellow;
 
+        // Print the tag, file, line number, and the comment itself.
         console.log(
           `${color(`[${tag}]`)} ${file}:${index + 1} → ${line.trim()}`
         );
