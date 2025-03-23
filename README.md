@@ -4,14 +4,9 @@ A simple CLI tool that scans your codebase for developer comments like `TODO`, `
 
 _Perfect for those "I'll come back to this" moments. Let your code remind you._
 
----
-
 ## ✨ What It Does
 
-- Scans files in your project for:
-  - `// TODO:`
-  - `// FIXME:`
-  - `// NOTE:`
+- Scans files in your project for: `TODO` | `FIXME` | `NOTE` comments
 - Logs them to your terminal with file name and line number
 - Works with `.js`, `.ts`, `.jsx`, `.tsx` files
 
