@@ -2,19 +2,39 @@
   "name": "remind-me-later",
   "version": "1.0.0",
   "description": "CLI tool to scan your code for TODO, FIXME, and NOTE reminders.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "keywords": [
+    "todo",
+    "fixme",
+    "note",
+    "reminder",
+    "cli",
+    "scanner",
+    "code",
+    "developer",
+    "backlog",
+    "task"
+  ],
+  "homepage": "https://github.com/bendiep/remind-me-later#readme",
+  "bugs": {
+    "url": "https://github.com/bendiep/remind-me-later/issues"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bendiep/remind-me-later.git"
   },
-  "keywords": [],
-  "author": "Ben Diep",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/bendiep/remind-me-later/issues"
+  "author": "Ben Diep",
+  "type": "module",
+  "main": "index.js",
+  "bin": {
+    "remind-me-later": "./index.js"
   },
-  "homepage": "https://github.com/bendiep/remind-me-later#readme"
+  "scripts": {
+    "dev": "node index.js",
+    "test": ""
+  },
+  "dependencies": {
+    "chalk": "^5.4.1",
+    "fast-glob": "^3.3.3"
+  }
 }
