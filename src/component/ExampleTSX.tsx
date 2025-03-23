@@ -12,6 +12,11 @@ export const ExampleTSX = ({}: ExampleTSXProps) => {
       <p>TODO</p>
       <p>FIXME</p>
       <p>NOTE</p>
+      {/*
+       * TODO: ExampleTSX.jsx - Something 4
+       * FIXME: ExampleTSX.jsx - Something 5
+       * NOTE: ExampleTSX.jsx - Something 6
+       */}
     </div>
   );
 };

@@ -10,6 +10,11 @@ export default function ExampleJSX() {
       <p>TODO</p>
       <p>FIXME</p>
       <p>NOTE</p>
+      {/*
+       * TODO: ExampleJSX.jsx - Something 4
+       * FIXME: ExampleJSX.jsx - Something 5
+       * NOTE: ExampleJSX.jsx - Something 6
+       */}
     </div>
   );
 }
