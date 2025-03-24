@@ -19,7 +19,7 @@ const multilineCommentStart = new RegExp(/^\s*(\/\*|\{\s*\/\*)/);
 const multilineCommentEnd = new RegExp(/\*\/\s*}?$/);
 
 async function scanComments(dir = ".") {
-  const entries = await fg(["**/*.{js,ts,jsx,tsx}"], {
+  const entries = await fg(["**/*.{js,ts,jsx,tsx,html,css}"], {
     cwd: dir,
     ignore: ["node_modules"],
   });

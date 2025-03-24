@@ -1,0 +1,31 @@
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3 {
+  /* TODO: Something 1 */
+  margin-top: 0;
+}
+
+/* TODO: Something 2
+ *
+ */
+a {
+  text-decoration: none;
+}
+
+/*
+ * FIXME: Something 3
+ */
+ul,
+ol {
+  /*
+   *
+   * FIXME: Something 4 */
+  list-style: none;
+  padding: 0;
+}
