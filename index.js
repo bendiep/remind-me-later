@@ -20,7 +20,7 @@ const jsxCommentPattern = `\\{\\/\\*\\s*${todoTags}:?.*?\\*\\/\\}`;
 const jsMultiLineCommentPattern = `\\/\\*[\\s\\S]*?${todoTags}:?[\\s\\S]*?\\*\\/`;
 
 // For JSX multiline comments, including the surrounding curly braces ({/* ... */})
-const jsxMultiLineCommentPattern = `\\{\\/\\*[\\s\\S]*?${todoTags}:?[\\s\\S]*?\\*\\/\\}`;
+const jsxMultiLineCommentPattern = `\\{\\/\\*(?=[\\s\\S]*?(?:TODO|FIXME|NOTE)\\s*:)[\\s\\S]*?\\*\\/\\}`;
 
 // Combined regex pattern
 const pattern = new RegExp(
