@@ -25,8 +25,8 @@ export default function ExampleJSX() {
        * NOTE: Something 7 */}
 
       {/* TODO: Something 8
-       * FIXME: Something 8
-       * NOTE: Something 8 */}
+       * FIXME: Something 9
+       * NOTE: Something 10 */}
     </div>
   );
 }

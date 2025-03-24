@@ -26,5 +26,5 @@ function multiply(a: number, b: number): number {
  * NOTE: Something 7 */
 
 /* TODO: Something 8
- * FIXME: Something 8
- * NOTE: Something 8 */
+ * FIXME: Something 9
+ * NOTE: Something 10 */
