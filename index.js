@@ -5,13 +5,26 @@ import fs from "fs/promises";
 import chalk from "chalk";
 
 // Individual regex patterns
+// Combined regex pattern
+
+// Define the tag group once.
 const todoTags = "(TODO|FIXME|NOTE)";
-const jsCommentPattern = `\/\/\\s*${todoTags}:?.*`;
-const jsxCommentPattern = `\\{\\/\\*\\s*${todoTags}:?.*\\*\\/\\}`;
+
+// For single-line JS comments
+const jsCommentPattern = `\\/\\/\\s*${todoTags}:?.*`;
+
+// For single-line JSX comments (e.g. {/* NOTE: ... */})
+const jsxCommentPattern = `\\{\\/\\*\\s*${todoTags}:?.*?\\*\\/\\}`;
+
+// For JS multiline comments (/* ... */)
+const jsMultiLineCommentPattern = `\\/\\*[\\s\\S]*?${todoTags}:?[\\s\\S]*?\\*\\/`;
+
+// For JSX multiline comments, including the surrounding curly braces ({/* ... */})
+const jsxMultiLineCommentPattern = `\\{\\/\\*[\\s\\S]*?${todoTags}:?[\\s\\S]*?\\*\\/\\}`;
 
 // Combined regex pattern
 const pattern = new RegExp(
-  `(?:${jsCommentPattern})|(?:${jsxCommentPattern})`,
+  `(?:${jsCommentPattern})|(?:${jsxCommentPattern})|(?:${jsMultiLineCommentPattern})|(?:${jsxMultiLineCommentPattern})`,
   "i"
 );
 
