@@ -4,18 +4,12 @@ import fg from "fast-glob";
 import fs from "fs/promises";
 import chalk from "chalk";
 
-const todoTags = "(TODO|FIXME|NOTE)";
-
-// Matches single-line comments (JS or JSX)
 const singleLineCommentPattern =
-  /^\s*(?:\/\/|{\s*\/\*)\s*(TODO|FIXME|NOTE):?\s*(.*?)\s*(?:\*\/)?\s*$/i;
-
-// Matches start/end of multi-line comment blocks
-const multilineCommentStart = /^\s*(\/\*|{\s*\/\*)/;
+  /^\s*(?:\/\/|\{\s*\/\*)\s*(TODO|FIXME|NOTE):?\s*(.*?)\s*(?:\*\/)?\s*$/i;
+const multilineCommentStart = /^\s*(\/\*|\{\s*\/\*)/;
 const multilineCommentEnd = /\*\/\s*}?$/;
-
-// Matches individual lines inside multiline comments with tags
-const multilineTagLinePattern = /^\s*\*?\s*(TODO|FIXME|NOTE):?\s*(.*)$/i;
+const multilineTagLinePattern =
+  /^\s*(?:\*|\/\*)?\s*(TODO|FIXME|NOTE):?\s*(.*?)\s*(?:\*\/)?$/i;
 
 async function scanComments(dir = ".") {
   const entries = await fg(["**/*.{js,ts,jsx,tsx}"], {
