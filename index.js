@@ -4,21 +4,28 @@ import fg from "fast-glob";
 import fs from "fs/promises";
 import chalk from "chalk";
 
+/*
+ * TAGS
+ */
 const TODO = "TODO";
 const FIXME = "FIXME";
 
+/*
+ * PATTERNS
+ */
 const singleLineCommentPattern = new RegExp(
-  `^\\s*(?:\\/\\/|\\{\\s*\\/\\*)\\s*(${TODO}|${FIXME}):?\\s*(.*?)\\s*(?:\\*\\/)?\\s*$`,
+  /^\s*(?:\/\/|\{\s*\/\*)\s*(TODO|FIXME|NOTE):?\s*(.*?)\s*(?:\*\/)?\s*$/,
   "i"
 );
+const multilineCommentStart = new RegExp(/^\s*(\/\*|\{\s*\/\*|<!--)/);
+const multilineCommentEnd = new RegExp(/(\*\/|-->)\s*}?$/);
 const multilineTagLinePattern = new RegExp(
-  `^\\s*(?:\\*|\\/\\*)?\\s*(${TODO}|${FIXME}):?\\s*(.*?)\\s*(?:\\*\\/)?$`,
+  /^\s*(?:\*|\/\*|<!--)?\s*(TODO|FIXME|NOTE):?\s*(.*?)\s*(?:\*\/|-->)?$/,
   "i"
 );
-const multilineCommentStart = new RegExp(/^\s*(\/\*|\{\s*\/\*)/);
-const multilineCommentEnd = new RegExp(/\*\/\s*}?$/);
 
 async function scanComments(dir = ".") {
+  // Get all files in the directory
   const entries = await fg(["**/*.{js,ts,jsx,tsx,html,css}"], {
     cwd: dir,
     ignore: ["node_modules"],
