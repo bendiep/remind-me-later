@@ -13,6 +13,8 @@ export default function ExampleJSX() {
       {/* TODO: ExampleJSX.jsx - Something 4
        * FIXME: ExampleJSX.jsx - Something 5
        * NOTE: ExampleJSX.jsx - Something 6 */}
+
+      {/* TODO: ExampleJSX.jsx - Something 7 */}
     </div>
   );
 }
