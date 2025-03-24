@@ -4,35 +4,32 @@ import fg from "fast-glob";
 import fs from "fs/promises";
 import chalk from "chalk";
 
-// Individual regex patterns
-// Combined regex pattern
-
 // Define the tag group once.
 const todoTags = "(TODO|FIXME|NOTE)";
 
-// For single-line JS comments
-const jsCommentPattern = `\\/\\/\\s*${todoTags}:?.*`;
+// Single-line JS comments
+const jsSingleCommentPattern = `\\/\\/\\s*${todoTags}:?.*`;
 
-// For single-line JSX comments (e.g. {/* NOTE: ... */})
-const jsxCommentPattern = `\\{\\/\\*\\s*${todoTags}:?.*?\\*\\/\\}`;
+// Single-line JSX comments (e.g., {/* NOTE: ... */})
+const jsxSingleCommentPattern = `\\{\\/\\*\\s*${todoTags}:?.*?\\*\\/\\}`;
 
-// For JS multiline comments (/* ... */)
-const jsMultiLineCommentPattern = `(//|/\\*|\\*)\\s*(${todoTags}):\\s*.*?(?=\\r?\\n|\\*/|$)`;
+// JS Multiline comments (/* ... */)
+const jsMultiLineCommentPattern = `\\/\\*[\\s\\S]*?\\b${todoTags}\\b:.*?\\*\\/`;
 
-// For JSX multiline comments, including the surrounding curly braces ({/* ... */})
-const jsxMultiLineCommentPattern = `\\{\\/\\*\\s*${todoTags}:?.*?\\*\\/\\}`;
+// JSX Multiline comments ({/* ... */})
+const jsxMultiLineCommentPattern = `\\{\\/\\*[\\s\\S]*?\\b${todoTags}\\b:.*?\\*\\/\\}`;
 
-// Combined regex pattern
-const pattern = new RegExp(
-  `(?:${jsCommentPattern})|(?:${jsxCommentPattern})|(?:${jsMultiLineCommentPattern})|(?:${jsxMultiLineCommentPattern})`,
-  "i"
+const combinedPattern = new RegExp(
+  [
+    jsSingleCommentPattern,
+    jsxSingleCommentPattern,
+    jsMultiLineCommentPattern,
+    jsxMultiLineCommentPattern,
+  ].join("|"),
+  "gim"
 );
 
 async function scanComments(dir = ".") {
-  /*
-   * Files to scan: *.js, *.ts, *.jsx, *.tsx
-   * Files to ignore: node_modules
-   */
   const entries = await fg(["**/*.{js,ts,jsx,tsx}"], {
     cwd: dir,
     ignore: ["node_modules"],
@@ -40,26 +37,33 @@ async function scanComments(dir = ".") {
 
   for (const file of entries) {
     const content = await fs.readFile(file, "utf8");
-    const lines = content.split("\n");
 
-    lines.forEach((line, index) => {
-      const match = line.match(pattern);
-      if (match) {
-        // If it's a JS comment, the tag is in group 1; for JSX, it's in group 2.
-        const tag = (match[1] || match[2]).toUpperCase();
-        const color =
-          tag === "TODO"
-            ? chalk.blue
-            : tag === "FIXME"
-            ? chalk.red
-            : chalk.yellow;
+    // Match comments globally in the file
+    const matches = content.matchAll(combinedPattern);
 
-        // Print the tag, file, line number, and the comment itself.
-        console.log(
-          `${color(`[${tag}]`)} ${file}:${index + 1} → ${line.trim()}`
-        );
-      }
-    });
+    for (const match of matches) {
+      // Determine matched tag (first capturing group)
+      const tag = match[1]?.toUpperCase() || "UNKNOWN";
+      const color =
+        tag === "TODO"
+          ? chalk.blue
+          : tag === "FIXME"
+          ? chalk.red
+          : tag === "NOTE"
+          ? chalk.yellow
+          : chalk.white;
+
+      // Determine line number by counting newlines before the match
+      const lineNumber = content.substring(0, match.index).split("\n").length;
+
+      // Extract matched comment text and clean it up
+      const commentText = match[0].replace(/^\s+|\s+$/g, "");
+
+      // Print the result
+      console.log(
+        `${color(`[${tag}]`)} ${file}:${lineNumber} → ${commentText}`
+      );
+    }
   }
 }
 
