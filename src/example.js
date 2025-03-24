@@ -1,18 +1,30 @@
-// TODO: example.js - Something 1
+// TODO: Something 1
 
 const JS_TODO = "";
 const JS_FIXME = "";
 const JS_NOTE = "";
 
 function sum(a, b) {
-  // TODO: example.js - Something 2
+  // TODO: Something 2
   return a + b;
 }
 
-// TODO: example.js - Something 3
+// TODO: Something 3
 
-/* TODO: example.js - Something 4
- * FIXME: example.js - Something 5
- * NOTE: example.js - Something 6 */
+/* TODO: Something 4 */
 
-/* TODO: example.js - Something 7 */
+/* TODO: Something 5
+ *
+ */
+
+/*
+ * FIXME: Something 6
+ */
+
+/*
+ *
+ * NOTE: Something 7 */
+
+/* TODO: Something 8
+ * FIXME: Something 8
+ * NOTE: Something 8 */
