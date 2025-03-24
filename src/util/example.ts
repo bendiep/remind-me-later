@@ -1,30 +1,30 @@
-// TODO: Something 1
-
-const TS_TODO: string = "";
-const TS_FIXME: string = "";
-const TS_NOTE: string = "";
+const TS_TODO_1: string = "TODO: ERROR 1";
+const TS_TODO_2: string = "// TODO: ERROR 2";
+const TS_FIXME_1: string = "/* FIXME: ERROR 3";
+const TS_FIXME_2: string = "* FIXME: ERROR 4";
+const TS_FIXME_3: string = "FIXME: ERROR 5 */";
 
 function multiply(a: number, b: number): number {
-  // FIXME: Something 2
+  // TODO: Something 1
   return a * b;
 }
 
-// NOTE: Something 3
+// TODO: Something 2
 
-/* TODO: Something 4 */
+/* FIXME: Something 3 */
 
-/* TODO: Something 5
+/* FIXME: Something 4
  *
  */
 
 /*
- * FIXME: Something 6
+ * TODO: Something 5
  */
 
 /*
  *
- * NOTE: Something 7 */
+ * TODO: Something 6 */
 
-/* TODO: Something 8
- * FIXME: Something 9
- * NOTE: Something 10 */
+/* FIXME: Something 7
+ * FIXME: Something 8
+ * TODO: Something 9 */

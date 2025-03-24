@@ -1,30 +1,30 @@
-// TODO: Something 1
-
-const JS_TODO = "";
-const JS_FIXME = "";
-const JS_NOTE = "";
+const JS_TODO_1 = "TODO: ERROR 1";
+const JS_TODO_2 = "// TODO: ERROR 2";
+const JS_FIXME_1 = "/* FIXME: ERROR 3";
+const JS_FIXME_2 = "* FIXME: ERROR 4";
+const JS_FIXME_3 = "FIXME: ERROR 5 */";
 
 function sum(a, b) {
-  // TODO: Something 2
+  // TODO: Something 1
   return a + b;
 }
 
-// TODO: Something 3
+// TODO: Something 2
 
-/* TODO: Something 4 */
+/* FIXME: Something 3 */
 
-/* TODO: Something 5
+/* FIXME: Something 4
  *
  */
 
 /*
- * FIXME: Something 6
+ * TODO: Something 5
  */
 
 /*
  *
- * NOTE: Something 7 */
+ * TODO: Something 6 */
 
-/* TODO: Something 8
- * FIXME: Something 9
- * NOTE: Something 10 */
+/* FIXME: Something 7
+ * FIXME: Something 8
+ * TODO: Something 9 */

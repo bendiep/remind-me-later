@@ -4,12 +4,19 @@ import fg from "fast-glob";
 import fs from "fs/promises";
 import chalk from "chalk";
 
-const singleLineCommentPattern =
-  /^\s*(?:\/\/|\{\s*\/\*)\s*(TODO|FIXME|NOTE):?\s*(.*?)\s*(?:\*\/)?\s*$/i;
-const multilineCommentStart = /^\s*(\/\*|\{\s*\/\*)/;
-const multilineCommentEnd = /\*\/\s*}?$/;
-const multilineTagLinePattern =
-  /^\s*(?:\*|\/\*)?\s*(TODO|FIXME|NOTE):?\s*(.*?)\s*(?:\*\/)?$/i;
+const TODO = "TODO";
+const FIXME = "FIXME";
+
+const singleLineCommentPattern = new RegExp(
+  `^\\s*(?:\\/\\/|\\{\\s*\\/\\*)\\s*(${TODO}|${FIXME}):?\\s*(.*?)\\s*(?:\\*\\/)?\\s*$`,
+  "i"
+);
+const multilineTagLinePattern = new RegExp(
+  `^\\s*(?:\\*|\\/\\*)?\\s*(${TODO}|${FIXME}):?\\s*(.*?)\\s*(?:\\*\\/)?$`,
+  "i"
+);
+const multilineCommentStart = new RegExp(/^\s*(\/\*|\{\s*\/\*)/);
+const multilineCommentEnd = new RegExp(/\*\/\s*}?$/);
 
 async function scanComments(dir = ".") {
   const entries = await fg(["**/*.{js,ts,jsx,tsx}"], {
@@ -41,11 +48,7 @@ async function scanComments(dir = ".") {
         const message = match[2].trim();
 
         const color =
-          tag === "TODO"
-            ? chalk.blue
-            : tag === "FIXME"
-            ? chalk.red
-            : chalk.yellow;
+          tag === TODO ? chalk.yellow : tag === FIXME ? chalk.red : chalk.white;
 
         console.log(`${color(`[${tag}]`)} ${file}:${lineNumber} → ${message}`);
       }
