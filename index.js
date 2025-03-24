@@ -4,30 +4,18 @@ import fg from "fast-glob";
 import fs from "fs/promises";
 import chalk from "chalk";
 
-// Define the tag group once.
 const todoTags = "(TODO|FIXME|NOTE)";
 
-// Single-line JS comments (e.g., //)
-const jsSingleCommentPattern = `\\/\\/\\s*${todoTags}:?.*`;
+// Matches single-line comments (JS or JSX)
+const singleLineCommentPattern =
+  /^\s*(?:\/\/|{\s*\/\*)\s*(TODO|FIXME|NOTE):?\s*(.*?)\s*(?:\*\/)?\s*$/i;
 
-// Single-line JSX comments (e.g., {/*  */})
-const jsxSingleCommentPattern = `\\{\\/\\*\\s*${todoTags}:?.*?\\*\\/\\}`;
+// Matches start/end of multi-line comment blocks
+const multilineCommentStart = /^\s*(\/\*|{\s*\/\*)/;
+const multilineCommentEnd = /\*\/\s*}?$/;
 
-// JS Multiline comments (/* \n */)
-const jsMultiLineCommentPattern = `\\/\\*[\\s\\S]*?\\b${todoTags}\\b:.*?\\*\\/`;
-
-// JSX Multiline comments ({/* \n */})
-const jsxMultiLineCommentPattern = `\\{\\/\\*[\\s\\S]*?\\b${todoTags}\\b:.*?\\*\\/\\}`;
-
-const combinedPattern = new RegExp(
-  [
-    jsSingleCommentPattern,
-    jsxSingleCommentPattern,
-    jsMultiLineCommentPattern,
-    jsxMultiLineCommentPattern,
-  ].join("|"),
-  "gi"
-);
+// Matches individual lines inside multiline comments with tags
+const multilineTagLinePattern = /^\s*\*?\s*(TODO|FIXME|NOTE):?\s*(.*)$/i;
 
 async function scanComments(dir = ".") {
   const entries = await fg(["**/*.{js,ts,jsx,tsx}"], {
@@ -37,33 +25,41 @@ async function scanComments(dir = ".") {
 
   for (const file of entries) {
     const content = await fs.readFile(file, "utf8");
+    const lines = content.split("\n");
 
-    // Match comments globally in the file
-    const matches = content.matchAll(combinedPattern);
+    let inMultilineComment = false;
 
-    for (const match of matches) {
-      // Determine matched tag (first capturing group)
-      const tag = match[1]?.toUpperCase() || "UNKNOWN";
-      const color =
-        tag === "TODO"
-          ? chalk.blue
-          : tag === "FIXME"
-          ? chalk.red
-          : tag === "NOTE"
-          ? chalk.yellow
-          : chalk.white;
+    lines.forEach((line, index) => {
+      const lineNumber = index + 1;
 
-      // Determine line number by counting newlines before the match
-      const lineNumber = content.substring(0, match.index).split("\n").length;
+      if (multilineCommentStart.test(line)) {
+        inMultilineComment = true;
+      }
 
-      // Extract matched comment text and clean it up
-      const commentText = match[0].replace(/^\s+|\s+$/g, "");
+      let match = line.match(singleLineCommentPattern);
 
-      // Print the result
-      console.log(
-        `${color(`[${tag}]`)} ${file}:${lineNumber} → ${commentText}`
-      );
-    }
+      if (!match && inMultilineComment) {
+        match = line.match(multilineTagLinePattern);
+      }
+
+      if (match) {
+        const tag = match[1].toUpperCase();
+        const message = match[2].trim();
+
+        const color =
+          tag === "TODO"
+            ? chalk.blue
+            : tag === "FIXME"
+            ? chalk.red
+            : chalk.yellow;
+
+        console.log(`${color(`[${tag}]`)} ${file}:${lineNumber} → ${message}`);
+      }
+
+      if (inMultilineComment && multilineCommentEnd.test(line)) {
+        inMultilineComment = false;
+      }
+    });
   }
 }
 
