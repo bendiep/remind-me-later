@@ -37,6 +37,7 @@ async function scanComments(dir = ".") {
     const lines = content.split("\n");
     let inMultilineComment = false;
 
+    // Loop through each line of the file to find tags
     lines.forEach((line, index) => {
       const lineNumber = index + 1;
 
