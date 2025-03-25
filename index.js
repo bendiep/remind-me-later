@@ -10,18 +10,19 @@ import chalk from "chalk";
  */
 const TODO = "TODO";
 const FIXME = "FIXME";
+const tagPattern = `(${TODO}|${FIXME})`;
 
 /*
  * Regular expressions for matching comment patterns.
  */
 export const singleLineCommentPattern = new RegExp(
-  /^\s*(?:\/\/|\{\s*\/\*)\s*(TODO|FIXME|NOTE):?\s*(.*?)\s*(?:\*\/)?\s*$/,
+  `^\\s*(?://|\\{\\s*/\\*)\\s*(${tagPattern}):?\\s*(.*?)\\s*(?:\\*/)?\\s*$`,
   "i"
 );
 export const multilineCommentStart = new RegExp(/^\s*(\/\*|\{\s*\/\*|<!--)/);
 export const multilineCommentEnd = new RegExp(/(\*\/|-->)\s*}?$/);
 export const multilineTagLinePattern = new RegExp(
-  /^\s*(?:\*|\/\*|<!--)?\s*(TODO|FIXME|NOTE):?\s*(.*?)\s*(?:\*\/|-->)?$/,
+  `^\\s*(?:\\*|\\/\\*|<!--)?\\s*(${tagPattern}):?\\s*(.*?)\\s*(?:\\*\\/|-->)?$`,
   "i"
 );
 
