@@ -10,6 +10,9 @@ import {
   multilineTagLinePattern,
 } from "../index.js";
 
+const EXPECTED_TEST_FILES = 6;
+const EXPECTED_FOUND_TAGS = 46;
+
 describe("remind-me-later real-file tests", () => {
   it("correctly identifies TODO and FIXME comments in example files", async () => {
     const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -18,8 +21,9 @@ describe("remind-me-later real-file tests", () => {
       cwd: exampleDir,
     });
 
-    expect(files.length).toBeGreaterThan(0);
+    expect(files.length).toBe(EXPECTED_TEST_FILES);
 
+    let totalFoundTags = 0;
     for (const file of files) {
       const filePath = path.join(exampleDir, file);
       const content = await fs.readFile(filePath, "utf8");
@@ -48,15 +52,13 @@ describe("remind-me-later real-file tests", () => {
         }
       });
 
-      expect(
-        foundTags.length,
-        `Expected at least one tag in ${file}`
-      ).toBeGreaterThan(0);
+      totalFoundTags += foundTags.length;
 
-      // Optional: Log tags for clarity during testing
       foundTags.forEach(({ tag, message }) => {
         console.log(`Matched in ${file}: [${tag}] ${message}`);
       });
     }
+
+    expect(totalFoundTags).toBe(EXPECTED_FOUND_TAGS);
   });
 });
