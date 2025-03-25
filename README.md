@@ -24,7 +24,7 @@ Or install locally as a dev dependency:
 npm install remind-me-later --save-dev
 ```
 
-Then, add a convenience script to your package.json.
+Then, add a script to your package.json.
 
 **Recommended**: Integrate with your existing dev script like this:
 
