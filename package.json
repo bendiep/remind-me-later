@@ -26,7 +26,7 @@
   "type": "module",
   "main": "index.js",
   "bin": {
-    "remind-me-later": "./index.js"
+    "remind-me-later": "index.js"
   },
   "scripts": {
     "dev": "node index.js",
