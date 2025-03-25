@@ -5,7 +5,8 @@ import fs from "fs/promises";
 import chalk from "chalk";
 
 /*
- * TAGS
+ * SUPPORTED TAGS:
+ * These are the tags that will be recognized in comments
  */
 const TODO = "TODO";
 const FIXME = "FIXME";
