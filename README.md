@@ -1,14 +1,12 @@
 # remind-me-later
 
-A simple CLI tool that scans your codebase for developer comments like `TODO`, `FIXME`, and `NOTE`, so you don’t forget to address them later.
-
-_Perfect for those "I'll come back to this" moments. Let your code remind you._
+A simple CLI tool to scan your codebase for `TODO` and `FIXME` comments — perfect for tracking unfinished tasks.
 
 ## ✨ What It Does
 
-- Scans files in your project for: `TODO` | `FIXME` | `NOTE` comments
-- Logs them to your terminal with file name and line number
-- Works with `.js`, `.ts`, `.jsx`, `.tsx` files
+- Scans your project files for comments tagged: `TODO` and `FIXME`
+- Logs matches neatly to your terminal, including filename and line number
+- Supports `.js`, `.ts`, `.jsx`, `.tsx`, `.html`, `.css` files
 
 ---
 
@@ -41,15 +39,8 @@ npm run reminders
 ```text
 [TODO] src/index.ts:100 → // TODO: clean up this logic
 [FIXME] src/utils/helpers.js:50 → // FIXME: this fails when empty
-[NOTE] src/api/user.js:150 → // NOTE: quick hack for now, revisit later
 ```
-
-## 🤔 How it Works
-
-Under the hood, remind-me-later uses a simple regex pattern to find comment markers in your code:
-
-It recursively scans your project directory, focusing on JavaScript and TypeScript files by default.
 
 ## 📝 License
 
-MIT — use it freely, fix your own code later 😅
+Released under the MIT License. Feel free to use, modify, and share!
