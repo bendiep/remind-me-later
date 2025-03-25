@@ -32,6 +32,8 @@ async function scanComments(dir = ".") {
     ignore: ["node_modules"],
   });
 
+  let totalFoundTags = 0;
+
   // Iterate through each file in the directory
   for (const file of entries) {
     const content = await fs.readFile(file, "utf8");
@@ -56,6 +58,7 @@ async function scanComments(dir = ".") {
 
       // Print matched comment
       if (match) {
+        totalFoundTags++;
         const tag = match[1].toUpperCase();
         const message = match[2].trim();
         const color =
@@ -68,6 +71,8 @@ async function scanComments(dir = ".") {
         inMultilineComment = false;
       }
     });
+
+    return totalFoundTags;
   }
 }
 
