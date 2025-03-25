@@ -38,6 +38,7 @@
     "fast-glob": "^3.3.3"
   },
   "devDependencies": {
+    "@types/node": "^22",
     "vitest": "^3.0.9"
   }
 }
