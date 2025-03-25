@@ -1,30 +1,62 @@
 import { describe, it, expect } from "vitest";
-import fs from "fs/promises";
-import path from "path";
 import fg from "fast-glob";
-
-const todoTags = "(TODO|FIXME|NOTE)";
-const pattern = new RegExp(
-  `(?:\\/\\/\\s*${todoTags}:?.*)|(?:\\{\\/\\*\\s*${todoTags}:?.*?\\*\\/\\})|(?:\\/\\*[\\s\\S]*?(?:${todoTags}:?[\\s\\S]*?)\\*\\/)|(?:\\{\\s*\\/\\*[\\s\\S]*?(?:${todoTags}:?[\\s\\S]*?)\\*\\/\\s*\\})`,
-  "i"
-);
+import fs from "fs/promises";
+import { fileURLToPath } from "url";
+import path from "path";
+import {
+  singleLineCommentPattern,
+  multilineCommentStart,
+  multilineCommentEnd,
+  multilineTagLinePattern,
+} from "@/index.js";
 
 describe("remind-me-later real-file tests", () => {
-  it("finds comments in example files", async () => {
-    const files = await fg(["tests/examples/**/*.{js,jsx,ts,tsx}"]);
+  it("correctly identifies TODO and FIXME comments in example files", async () => {
+    const __dirname = path.dirname(fileURLToPath(import.meta.url));
+    const exampleDir = path.resolve(__dirname, "../examples");
+    const files = await fg(["**/*.{js,ts,jsx,tsx,html,css}"], {
+      cwd: exampleDir,
+    });
 
-    expect(files.length).toBeGreaterThan(0); // Make sure example files exist
+    expect(files.length).toBeGreaterThan(0);
 
     for (const file of files) {
-      const content = await fs.readFile(file, "utf8");
-      const matches = content.match(pattern);
+      const filePath = path.join(exampleDir, file);
+      const content = await fs.readFile(filePath, "utf8");
+      const lines = content.split("\n");
+      let inMultilineComment = false;
+      let foundTags = [];
 
-      expect(matches, `No matches in ${file}`).not.toBeNull();
+      lines.forEach((line) => {
+        if (multilineCommentStart.test(line)) {
+          inMultilineComment = true;
+        }
 
-      // Optional: Log match for debugging
-      if (matches) {
-        console.log(`Matched in ${file}:`, matches[0].trim());
-      }
+        let match = line.match(singleLineCommentPattern);
+        if (!match && inMultilineComment) {
+          match = line.match(multilineTagLinePattern);
+        }
+
+        if (match) {
+          const tag = match[1].toUpperCase();
+          const message = match[2].trim();
+          foundTags.push({ tag, message });
+        }
+
+        if (inMultilineComment && multilineCommentEnd.test(line)) {
+          inMultilineComment = false;
+        }
+      });
+
+      expect(
+        foundTags.length,
+        `Expected at least one tag in ${file}`
+      ).toBeGreaterThan(0);
+
+      // Optional: Log tags for clarity during testing
+      foundTags.forEach(({ tag, message }) => {
+        console.log(`Matched in ${file}: [${tag}] ${message}`);
+      });
     }
   });
 });

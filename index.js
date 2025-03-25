@@ -14,13 +14,13 @@ const FIXME = "FIXME";
 /*
  * Regular expressions for matching comment patterns.
  */
-const singleLineCommentPattern = new RegExp(
+export const singleLineCommentPattern = new RegExp(
   /^\s*(?:\/\/|\{\s*\/\*)\s*(TODO|FIXME|NOTE):?\s*(.*?)\s*(?:\*\/)?\s*$/,
   "i"
 );
-const multilineCommentStart = new RegExp(/^\s*(\/\*|\{\s*\/\*|<!--)/);
-const multilineCommentEnd = new RegExp(/(\*\/|-->)\s*}?$/);
-const multilineTagLinePattern = new RegExp(
+export const multilineCommentStart = new RegExp(/^\s*(\/\*|\{\s*\/\*|<!--)/);
+export const multilineCommentEnd = new RegExp(/(\*\/|-->)\s*}?$/);
+export const multilineTagLinePattern = new RegExp(
   /^\s*(?:\*|\/\*|<!--)?\s*(TODO|FIXME|NOTE):?\s*(.*?)\s*(?:\*\/|-->)?$/,
   "i"
 );
