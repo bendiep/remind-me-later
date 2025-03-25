@@ -25,7 +25,7 @@ export const multilineTagLinePattern = new RegExp(
   "i"
 );
 
-async function scanComments(dir = ".") {
+export async function scanComments(dir = ".") {
   // Get all matching files from the directory (excluding node_modules)
   const entries = await fg(["**/*.{js,ts,jsx,tsx,html,css}"], {
     cwd: dir,
@@ -71,9 +71,9 @@ async function scanComments(dir = ".") {
         inMultilineComment = false;
       }
     });
-
-    return totalFoundTags;
   }
+
+  return totalFoundTags;
 }
 
 scanComments();
