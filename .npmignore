@@ -1,0 +1,11 @@
+# Dependencies
+node_modules/
+
+# Package files
+package-lock.json
+
+# Configuration files
+.gitignore
+
+# Test files
+tests/
