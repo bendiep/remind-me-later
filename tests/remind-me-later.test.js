@@ -8,12 +8,12 @@ import {
   multilineCommentStart,
   multilineCommentEnd,
   multilineTagLinePattern,
-} from "@/index.js";
+} from "../index.js";
 
 describe("remind-me-later real-file tests", () => {
   it("correctly identifies TODO and FIXME comments in example files", async () => {
     const __dirname = path.dirname(fileURLToPath(import.meta.url));
-    const exampleDir = path.resolve(__dirname, "../examples");
+    const exampleDir = path.resolve(__dirname, "./examples");
     const files = await fg(["**/*.{js,ts,jsx,tsx,html,css}"], {
       cwd: exampleDir,
     });
