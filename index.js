@@ -15,13 +15,13 @@ const tagPattern = `(${TODO}|${FIXME})`;
 /*
  * Regular expressions for matching comment patterns.
  */
-export const singleLineCommentPattern = new RegExp(
+const singleLineCommentPattern = new RegExp(
   `^\\s*(?://|\\{\\s*/\\*)\\s*(${tagPattern}):?\\s*(.*?)\\s*(?:\\*/)?\\s*$`,
   "i"
 );
-export const multilineCommentStart = new RegExp(/^\s*(\/\*|\{\s*\/\*|<!--)/);
-export const multilineCommentEnd = new RegExp(/(\*\/|-->)\s*}?$/);
-export const multilineTagLinePattern = new RegExp(
+const multilineCommentStart = new RegExp(/^\s*(\/\*|\{\s*\/\*|<!--)/);
+const multilineCommentEnd = new RegExp(/(\*\/|-->)\s*}?$/);
+const multilineTagLinePattern = new RegExp(
   `^\\s*(?:\\*|\\/\\*|<!--)?\\s*(${tagPattern}):?\\s*(.*?)\\s*(?:\\*\\/|-->)?$`,
   "i"
 );
