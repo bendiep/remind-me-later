@@ -16,7 +16,6 @@ export const ExampleTSX = ({}: ExampleTSXProps) => {
       <h1>Example TSX</h1>
       <p>TODO</p>
       <p>FIXME</p>
-      <p>NOTE</p>
       {/* FIXME: Something 4 */}
 
       {/* TODO: Something 5

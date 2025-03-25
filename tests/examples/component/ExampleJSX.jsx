@@ -14,7 +14,6 @@ export default function ExampleJSX() {
       <h1>Example JSX</h1>
       <p>TODO</p>
       <p>FIXME</p>
-      <p>NOTE</p>
       {/* FIXME: Something 4 */}
 
       {/* TODO: Something 5
