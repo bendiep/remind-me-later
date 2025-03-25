@@ -43,7 +43,7 @@ Run manually:
 npm run remind-me-later
 ```
 
-Or integrated into your dev workflow:
+Or integrated with your dev workflow:
 
 ```bash
 npm run dev
