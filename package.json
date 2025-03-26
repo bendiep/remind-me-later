@@ -1,6 +1,6 @@
 {
   "name": "remind-me-later",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "CLI tool to scan your code for TODO and FIXME reminders.",
   "keywords": [
     "todo",
@@ -11,7 +11,14 @@
     "code",
     "developer",
     "backlog",
-    "task"
+    "task",
+    "node",
+    "react",
+    "nextjs",
+    "javascript",
+    "typescript",
+    "html",
+    "css"
   ],
   "homepage": "https://github.com/bendiep/remind-me-later#readme",
   "bugs": {

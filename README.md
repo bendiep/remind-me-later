@@ -35,7 +35,7 @@ Then, add a script to your package.json.
 ```json
 "scripts": {
   "remind-me-later": "remind-me-later",
-  "dev": "npm run remind-me-later && <existing_dev_command>"
+  "dev": "remind-me-later && <existing_dev_command>"
 }
 ```
 

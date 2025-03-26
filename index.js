@@ -13,6 +13,12 @@ const FIXME = "FIXME";
 const tagPattern = `(${TODO}|${FIXME})`;
 
 /*
+ * FILE PATTERNS to INCLUDE and IGNORE:
+ */
+const INCLUDE_PATTERNS = ["**/*.{js,ts,jsx,tsx,html,css}"];
+const IGNORE_PATTERNS = ["node_modules"];
+
+/*
  * Regular expressions for matching comment patterns.
  */
 const singleLineCommentPattern = new RegExp(
@@ -28,9 +34,9 @@ const multilineTagLinePattern = new RegExp(
 
 export async function scanComments(dir = ".") {
   // Get all matching files from the directory (excluding node_modules)
-  const entries = await fg(["**/*.{js,ts,jsx,tsx,html,css}"], {
+  const entries = await fg(INCLUDE_PATTERNS, {
     cwd: dir,
-    ignore: ["node_modules"],
+    ignore: IGNORE_PATTERNS,
   });
 
   let totalFoundTags = 0;
@@ -77,4 +83,24 @@ export async function scanComments(dir = ".") {
   return totalFoundTags;
 }
 
-scanComments();
+scanComments().then((total) => {
+  const plural = total !== 1;
+
+  if (total === 0) {
+    console.log(
+      chalk.greenBright(
+        "\n✅ No TODO/FIXME comments found! Your codebase is squeaky clean 🧼\n"
+      )
+    );
+  } else {
+    console.log(
+      chalk.yellowBright(
+        `\n⚠️  Found ${total} comment${
+          plural ? "s" : ""
+        } marked with TODO/FIXME. Don't forget to come back to ${
+          plural ? "them" : "it"
+        }! 💬\n`
+      )
+    );
+  }
+});
