@@ -83,4 +83,24 @@ export async function scanComments(dir = ".") {
   return totalFoundTags;
 }
 
-scanComments();
+scanComments().then((total) => {
+  const plural = total !== 1;
+
+  if (total === 0) {
+    console.log(
+      chalk.greenBright(
+        "\n✅ No TODO/FIXME comments found! Your codebase is squeaky clean 🧼\n"
+      )
+    );
+  } else {
+    console.log(
+      chalk.yellowBright(
+        `\n⚠️  Found ${total} comment${
+          plural ? "s" : ""
+        } marked with TODO/FIXME. Don't forget to come back to ${
+          plural ? "them" : "it"
+        }! 💬\n`
+      )
+    );
+  }
+});
