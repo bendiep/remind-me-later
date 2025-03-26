@@ -13,6 +13,12 @@ const FIXME = "FIXME";
 const tagPattern = `(${TODO}|${FIXME})`;
 
 /*
+ * FILE PATTERNS to INCLUDE and IGNORE:
+ */
+const INCLUDE_PATTERNS = ["**/*.{js,ts,jsx,tsx,html,css}"];
+const IGNORE_PATTERNS = ["node_modules"];
+
+/*
  * Regular expressions for matching comment patterns.
  */
 const singleLineCommentPattern = new RegExp(
@@ -28,9 +34,9 @@ const multilineTagLinePattern = new RegExp(
 
 export async function scanComments(dir = ".") {
   // Get all matching files from the directory (excluding node_modules)
-  const entries = await fg(["**/*.{js,ts,jsx,tsx,html,css}"], {
+  const entries = await fg(INCLUDE_PATTERNS, {
     cwd: dir,
-    ignore: ["node_modules"],
+    ignore: IGNORE_PATTERNS,
   });
 
   let totalFoundTags = 0;
