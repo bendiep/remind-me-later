@@ -4,7 +4,6 @@
 [![Node.js Version](https://img.shields.io/node/v/remind-me-later.svg)](https://www.npmjs.com/package/remind-me-later)
 [![npm weekly downloads](https://img.shields.io/npm/dw/remind-me-later.svg)](https://www.npmjs.com/package/remind-me-later)
 [![npm total downloads](https://img.shields.io/npm/dt/remind-me-later.svg)](https://www.npmjs.com/package/remind-me-later)
-[![Node.js Version](https://img.shields.io/node/v/remind-me-later.svg)](https://www.npmjs.com/package/remind-me-later)
 [![License](https://img.shields.io/npm/l/remind-me-later.svg)](https://github.com/bendiep/remind-me-later/blob/main/LICENSE)
 
 A simple CLI tool to scan your codebase for `TODO` and `FIXME` comments — perfect for tracking unfinished tasks.
