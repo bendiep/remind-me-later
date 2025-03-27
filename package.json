@@ -1,6 +1,6 @@
 {
   "name": "remind-me-later",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "CLI tool to scan your code for TODO and FIXME reminders.",
   "keywords": [
     "todo",
@@ -30,6 +30,9 @@
   },
   "license": "MIT",
   "author": "Ben Diep",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "type": "module",
   "main": "index.js",
   "bin": {
