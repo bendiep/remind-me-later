@@ -39,7 +39,9 @@ export async function scanComments(dir = ".") {
     ignore: IGNORE_PATTERNS,
   });
 
-  let totalFoundTags = 0;
+  let totalFoundTags = 0,
+    totalTodo = 0,
+    totalFixme = 0;
 
   // Iterate through each file in the directory
   for (const file of entries) {
@@ -63,14 +65,28 @@ export async function scanComments(dir = ".") {
         match = line.match(multilineTagLinePattern);
       }
 
-      // Print matched comment
       if (match) {
-        totalFoundTags++;
         const tag = match[1].toUpperCase();
-        const message = match[2].trim();
-        const color =
-          tag === TODO ? chalk.yellow : tag === FIXME ? chalk.red : chalk.white;
-        console.log(`${color(`[${tag}]`)} ${file}:${lineNumber} → ${message}`);
+        const isTodo = tag === TODO;
+        const isFixme = tag === FIXME;
+        const message =
+          match[2] +
+          ": " +
+          match[3]
+            .trim()
+            .replace(/[^\w\s]/g, " ")
+            .trim();
+        const color = isTodo ? chalk.yellow : isFixme ? chalk.red : chalk.white;
+
+        // Increment counters
+        totalFoundTags++;
+        if (isTodo) totalTodo++;
+        if (isFixme) totalFixme++;
+
+        // Print matched comment
+        console.log(
+          `${color(`[${tag}]`)} ${file}:${lineNumber} ${color("→")} ${message}`
+        );
       }
 
       // Check if a multiline comment ends on this line
@@ -80,13 +96,18 @@ export async function scanComments(dir = ".") {
     });
   }
 
-  return totalFoundTags;
+  return {
+    total: totalFoundTags,
+    totalTodo: totalTodo,
+    totalFixme: totalFixme,
+  };
 }
 
-scanComments().then((total) => {
-  const plural = total !== 1;
+scanComments().then((result) => {
+  const plural = result.total !== 1;
 
-  if (total === 0) {
+  // Print summary message
+  if (result.total === 0) {
     console.log(
       chalk.greenBright(
         "\n✅ No TODO/FIXME comments found! Your codebase is squeaky clean 🧼\n"
@@ -94,12 +115,14 @@ scanComments().then((total) => {
     );
   } else {
     console.log(
-      chalk.yellowBright(
-        `\n⚠️  Found ${total} comment${
+      chalk.blueBright(
+        `\n⚠️  Found ${result.total} comment${
           plural ? "s" : ""
-        } marked with TODO/FIXME. Don't forget to come back to ${
-          plural ? "them" : "it"
-        }! 💬\n`
+        } marked with TODO/FIXME (${chalk.yellow(
+          `TODO: ${result.totalTodo}`
+        )}, ${chalk.red(
+          `FIXME: ${result.totalFixme}`
+        )})\n💬 Don't forget to come back to ${plural ? "them" : "it"}!\n`
       )
     );
   }
