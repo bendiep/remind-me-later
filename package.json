@@ -1,7 +1,7 @@
 {
   "name": "remind-me-later",
-  "version": "1.0.3",
-  "description": "CLI tool to scan your code for TODO and FIXME reminders.",
+  "version": "1.0.4",
+  "description": "A command-line tool to scan your code for TODO and FIXME comments.",
   "keywords": [
     "todo",
     "fixme",
