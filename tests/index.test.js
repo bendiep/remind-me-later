@@ -1,11 +1,17 @@
 import { describe, it, expect } from "vitest";
 import { scanComments } from "../index.js";
 
-const EXPECTED_FOUND_TAGS = 46;
+const EXPECTED_TOTAL_TAGS = 46;
+const EXPECTED_TODO_TAGS = 26;
+const EXPECTED_FIXME_TAGS = 20;
 
 describe("scanComments", () => {
   it("should return the correct number of tags found", async () => {
-    const foundTags = await scanComments(".");
-    expect(foundTags).toBe(EXPECTED_FOUND_TAGS);
+    const result = await scanComments(".");
+    expect(result).toStrictEqual({
+      total: EXPECTED_TOTAL_TAGS,
+      totalTodo: EXPECTED_TODO_TAGS,
+      totalFixme: EXPECTED_FIXME_TAGS,
+    });
   });
 });
