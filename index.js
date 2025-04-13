@@ -116,7 +116,7 @@ scanComments().then((result) => {
   } else {
     console.log(
       chalk.blueBright(
-        `\n⚠️  Found ${result.total} comment${
+        `\n🟡 Found ${result.total} comment${
           plural ? "s" : ""
         } marked with TODO/FIXME (${chalk.yellow(
           `TODO: ${result.totalTodo}`
