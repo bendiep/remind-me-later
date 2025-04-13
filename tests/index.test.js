@@ -1,9 +1,9 @@
 import { describe, it, expect } from "vitest";
 import { scanComments } from "../index.js";
 
-const EXPECTED_TOTAL_TAGS = 46;
-const EXPECTED_TODO_TAGS = 26;
-const EXPECTED_FIXME_TAGS = 20;
+const EXPECTED_TOTAL_TAGS = 50;
+const EXPECTED_TODO_TAGS = 28;
+const EXPECTED_FIXME_TAGS = 22;
 
 describe("scanComments", () => {
   it("should return the correct number of tags found", async () => {

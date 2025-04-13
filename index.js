@@ -6,7 +6,7 @@ import chalk from "chalk";
 
 /*
  * SUPPORTED TAGS:
- * These are the tags that will be recognized in comments
+ * These are the tags that will be recognised in comments
  */
 const TODO = "TODO";
 const FIXME = "FIXME";
@@ -22,7 +22,7 @@ const IGNORE_PATTERNS = ["node_modules"];
  * Regular expressions for matching comment patterns.
  */
 const singleLineCommentPattern = new RegExp(
-  `^\\s*(?://|\\{\\s*/\\*)\\s*(${tagPattern}):?\\s*(.*?)\\s*(?:\\*/)?\\s*$`,
+  `(?:^|\\s)(?://|/\\*|\\{\\s*/\\*)\\s*(${tagPattern})\\s*:?(.*?)\\s*(?:\\*/\\}?)?\\s*$`,
   "i"
 );
 const multilineCommentStart = new RegExp(/^\s*(\/\*|\{\s*\/\*|<!--)/);
@@ -34,7 +34,7 @@ const multilineTagLinePattern = new RegExp(
 
 export async function scanComments(dir = ".") {
   // Get all matching files from the directory (excluding node_modules)
-  const entries = await fg(INCLUDE_PATTERNS, {
+  const files = await fg(INCLUDE_PATTERNS, {
     cwd: dir,
     ignore: IGNORE_PATTERNS,
   });
@@ -44,7 +44,7 @@ export async function scanComments(dir = ".") {
     totalFixme = 0;
 
   // Iterate through each file in the directory
-  for (const file of entries) {
+  for (const file of files) {
     const content = await fs.readFile(file, "utf8");
     const lines = content.split("\n");
     let inMultilineComment = false;
