@@ -11,9 +11,20 @@ A simple command-line tool to scan your codebase for `TODO` and `FIXME` comments
 
 ## 🔍 What It Does
 
-- Scans your project files for comments tagged: `TODO` and `FIXME`
-- Logs matches neatly to your terminal, including filename and line number
-- Supports `.js`, `.ts`, `.jsx`, `.tsx`, `.html`, `.css` files
+- Scans your project files for comments tagged with `TODO` and `FIXME`
+- Detects both single-line and multi-line comments
+- Outputs matches neatly to your terminal, including:
+  - `Filename`
+  - `Line number`
+  - `Comment preview`
+- Displays a final summary with the total number of matches found
+- Supports the following file types:
+  - `.js`
+  - `.ts`
+  - `.jsx`
+  - `.tsx`
+  - `.html`
+  - `.css`
 
 ---
 
@@ -37,8 +48,8 @@ Then, add a script to your package.json.
 
 ```json
 "scripts": {
-  "remind-me-later": "remind-me-later",
-  "dev": "remind-me-later && <existing_dev_command>"
+  "dev": "remind-me-later && <existing_dev_command>",
+  "remind-me-later": "remind-me-later"
 }
 ```
 
@@ -59,8 +70,11 @@ npm run dev
 ## 📂 Example Output
 
 ```text
-[TODO] src/index.ts:100 → // TODO: Clean up this logic
-[FIXME] src/utils/helpers.js:50 → // FIXME: This fails when empty
+[TODO] src/index.ts:100 → TODO: Clean up this logic
+[FIXME] src/utils/helpers.js:50 → FIXME: This fails when empty
+
+⚠️ Found 2 comments marked with TODO/FIXME (TODO: 1, FIXME: 1)
+💬 Don't forget to come back to them!
 ```
 
 ## 📝 License
