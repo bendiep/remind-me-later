@@ -27,4 +27,4 @@ function sum(a, b) {
 
 /* FIXME: Something 7
  * FIXME: Something 8
- * TODO: Something 9 END */
+ * TODO: Something 9 [END] */

@@ -38,7 +38,7 @@ export const ExampleTSX = ({}: ExampleTSXProps) => {
         prop1="" // TODO: Something 11
         prop2=""
         prop3=""
-        prop4="" // FIXME: Something 12 END
+        prop4="" // FIXME: Something 12 [END]
         prop5=""
       />
     </div>
