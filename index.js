@@ -10,7 +10,7 @@ import chalk from "chalk";
  */
 const TODO = "TODO";
 const FIXME = "FIXME";
-const tagPattern = `(${TODO}|${FIXME})`;
+const TAG_PATTERN = `(${TODO}|${FIXME})`;
 
 /*
  * FILE PATTERNS to INCLUDE and IGNORE:
@@ -22,13 +22,13 @@ const IGNORE_PATTERNS = ["node_modules"];
  * Regular expressions for matching comment patterns.
  */
 const singleLineCommentPattern = new RegExp(
-  `(?:^|\\s)(?://|/\\*|\\{\\s*/\\*)\\s*(${tagPattern})\\s*:?(.*?)\\s*(?:\\*/\\}?)?\\s*$`,
+  `(?:^|\\s)(?://|/\\*|\\{\\s*/\\*)\\s*(${TAG_PATTERN})\\s*:?(.*?)\\s*(?:\\*/\\}?)?\\s*$`,
   "i"
 );
 const multilineCommentStart = new RegExp(/^\s*(\/\*|\{\s*\/\*|<!--)/);
 const multilineCommentEnd = new RegExp(/(\*\/|-->)\s*}?$/);
 const multilineTagLinePattern = new RegExp(
-  `^\\s*(?:\\*|\\/\\*|<!--)?\\s*(${tagPattern}):?\\s*(.*?)\\s*(?:\\*\\/|-->)?$`,
+  `^\\s*(?:\\*|\\/\\*|<!--)?\\s*(${TAG_PATTERN}):?\\s*(.*?)\\s*(?:\\*\\/|-->)?$`,
   "i"
 );
 
