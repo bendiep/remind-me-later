@@ -12,11 +12,11 @@ A simple command-line tool to scan your codebase for `TODO` and `FIXME` comments
 ## 🔍 What It Does
 
 - Scans your project files for comments tagged with `TODO` and `FIXME`
-- Detects both single-line and multi-line comments
+- Detects both `single-line` and `multi-line` comments
 - Outputs matches neatly to your terminal, including:
-  - `Filename`
-  - `Line number`
-  - `Comment preview`
+  - `filename`
+  - `line number`
+  - `comment preview`
 - Displays a final summary with the total number of matches found
 - Supports the following file types:
   - `.js`
