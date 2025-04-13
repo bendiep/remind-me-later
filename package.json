@@ -1,6 +1,6 @@
 {
   "name": "remind-me-later",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A command-line tool to scan your code for TODO and FIXME comments.",
   "keywords": [
     "todo",
