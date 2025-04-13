@@ -31,6 +31,14 @@ export default function ExampleJSX() {
       {/* FIXME: Something 8
        * TODO: Something 9
        * TODO: Something 10 */}
+
+      <Component
+        prop1="" // TODO: Something 11
+        prop2=""
+        prop3=""
+        prop4="" // FIXME: Something 12 END
+        prop5=""
+      />
     </div>
   );
 }

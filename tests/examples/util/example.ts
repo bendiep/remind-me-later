@@ -27,4 +27,4 @@ function multiply(a: number, b: number): number {
 
 /* FIXME: Something 7
  * FIXME: Something 8
- * TODO: Something 9 */
+ * TODO: Something 9 END */
