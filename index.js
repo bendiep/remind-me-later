@@ -74,7 +74,8 @@ export async function scanComments(dir = ".") {
           ": " +
           match[3]
             .trim()
-            .replace(/[^\w\s]/g, " ")
+            .replace(/^[/\*\s{]+/, "") // leading symbols: e.g. //, /*, *, {
+            .replace(/[\s\*\/}]+$/, "") // trailing symbols: e.g. */, }, *
             .trim();
         const color = isTodo ? chalk.yellow : isFixme ? chalk.red : chalk.white;
 
