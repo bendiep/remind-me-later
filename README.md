@@ -73,7 +73,7 @@ npm run dev
 [TODO] src/index.ts:100 → TODO: Clean up this logic
 [FIXME] src/utils/helpers.js:50 → FIXME: This fails when empty
 
-⚠️ Found 2 comments marked with TODO/FIXME (TODO: 1, FIXME: 1)
+🟡 Found 2 comments marked with TODO/FIXME (TODO: 1, FIXME: 1)
 💬 Don't forget to come back to them!
 ```
 
